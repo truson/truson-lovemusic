@@ -8,11 +8,11 @@
     <artifactId>truson-lovemusic</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>lovemusic</name>
-    <packaging>pom</packaging><!--The current core packaging values are: pom, jar, maven-plugin, ejb, war, ear, rar, par-->
+    <packaging>war</packaging><!--The current core packaging values are: pom, jar, maven-plugin, ejb, war, ear, rar, par-->
     <properties><!--定义变量-->
         <encoding>UTF-8</encoding>
         <jdk.version>1.6</jdk.version>
-        <spring.version>4.1.5.RELEASE</spring.version>
+        <spring.version>3.2.4.RELEASE</spring.version>
     </properties>
 
     <dependencies>
@@ -21,6 +21,26 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <!--<build>
