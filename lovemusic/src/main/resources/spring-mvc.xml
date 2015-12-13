@@ -21,17 +21,53 @@
     <mvc:annotation-driven/>
 
     <!-- 将无法mapping到Controller的path交给default servlet handler处理 ，对静态资源的访问将由默认处理 -->
-    <mvc:default-servlet-handler/>
-    <mvc:resources mapping="/static/**" location="/static/"/>
+    <!--<mvc:default-servlet-handler/>-->
+    <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
 
     <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!--<property name="cache" value="false"/>-->
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
-        <property name="order" value="0"/>
-        <!--<property name="contentType"><value>text/html;charset=UTF-8</value></property>-->
     </bean>
+
+    <mvc:interceptors>
+        <!--性能监控监控-->
+        <!--<bean class="com.jd.admin.car.web.interceptor.StopWatchHandlerInterceptor"/>-->
+        <!--校验登陆-->
+        <mvc:interceptor>
+            <mvc:mapping path="/*.do"/>
+            <bean class="com.truson.lovemusic.practice.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+        <!--校验数据签名-->
+        <!--<mvc:interceptor>
+            <mvc:mapping path="/client/**"/>
+            <bean class="com.jd.admin.car.web.interceptor.SignInterceptor"/>
+        </mvc:interceptor>
+        &lt;!&ndash;解密PIN等相关信息&ndash;&gt;
+        <mvc:interceptor>
+            <mvc:mapping path="/client/**"/>
+            <bean class="com.jd.admin.car.web.interceptor.DecryptionPinInterceptor"/>
+        </mvc:interceptor>
+        &lt;!&ndash;安全校验&ndash;&gt;
+        <bean class="com.jd.admin.car.web.interceptor.SecurityCheckInterceptor" init-method="initSecurity">
+            <property name="whiteUrllists">
+                <set>
+                    <value>/</value>
+                    <value>/error</value>
+                    <value>/app/adv/*.html</value>
+                    &lt;!&ndash;广告的url &ndash;&gt;
+                    <value>/WEB-INF/vm/error.vm</value>
+                </set>
+            </property>
+            <property name="blackIps">
+                <value>${securityCheckInterceptor.blackIps}</value>
+            </property>
+            <property name="whiteIps">
+                <value>${securityCheckInterceptor.whiteIps}</value>
+            </property>
+            <property name="uacount" value="${securityCheckInterceptor.uacount}"/>
+        </bean>-->
+    </mvc:interceptors>
 
 </beans>
