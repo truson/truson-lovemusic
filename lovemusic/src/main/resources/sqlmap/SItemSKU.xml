@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jd.admin.car.dao.SItemSKUDao">
+
+    <!-- 所有查询列 -->
+    <sql id="QUERY_COLUMN_LIST">
+       skuid, productid, jd_dealerid,jd_dealername,
+       jd_shopid,accy_catid,
+       item_type, cat_type,jd_catid,name,tagid,
+       alias, price, master_img,praise,
+       status,item_model,work_time,remark,
+       create_time,update_time,creator,updator,is_valid,is_delete
+	</sql>
+
+    <!-- 查询列来源表-->
+    <sql id="QUERY_FROM_TABLE"><![CDATA[
+
+
+
+        FROM s_item_sku
+
+
+
+        ]]></sql>
+
+    <!-- 全部条件(更多功能可以通过queryData扩展实现)  select * from person where name  like "%"#{name}"%" -->
+    <sql id="QUERY_WHERE_CLAUSE">
+        <where>
+
+            <if test="skuid != null and skuid != ''"><![CDATA[AND skuid = #{skuid}]]></if>
+
+            <if test="status != null  "><![CDATA[AND status = #{status}]]></if>
+            <if test="is_valid != null "><![CDATA[AND is_valid = #{is_valid}]]></if>
+            <if test="is_delete != null  "><![CDATA[AND is_delete = #{is_delete}]]></if>
+            <if test="item_model != null  "><![CDATA[AND item_model = #{item_model}]]></if>
+
+            <if test="productid != null and productid != ''"><![CDATA[AND productid = #{productid}]]></if>
+            <if test="jd_dealerid != null and jd_dealerid != ''"><![CDATA[AND jd_dealerid = #{jd_dealerid}]]></if>
+            <if test="accy_catid != null and accy_catid != ''"><![CDATA[AND accy_catid = #{accy_catid}]]></if>
+            <if test="item_type != null and item_type != ''"><![CDATA[AND item_type = #{item_type}]]></if>
+
+            <if test="alias != null and alias != ''"><![CDATA[AND alias = #{alias}]]></if>
+
+            <if test="cat_type != null and cat_type != ''"><![CDATA[AND cat_type = #{cat_type}]]></if>
+            <if test="jd_catid != null and jd_catid != ''"><![CDATA[AND jd_catid = #{jd_catid}]]></if>
+            <if test="tagid != null and tagid != ''"><![CDATA[AND tagid like CONCAT('%',#{tagid},'%') ]]></if>
+            <if test="name != null and name != ''"><![CDATA[AND name like CONCAT('%',#{name},'%') ]]></if>
+
+            <if test="price!=null and price == -1 "><![CDATA[AND price > 0 ]]></if>
+        </where>
+    </sql>
+
+    <!-- 智能排序与分页 -->
+    <sql id="QUERY_ORDER_LIMIT_CONDTION">
+        <if test="orderField != null and orderField != '' and orderFieldType != null and orderFieldType != ''">
+            <![CDATA[ORDER BY ${orderField} ${orderFieldType}]]></if>
+        <if test="startIndex != null and startIndex &gt;= 0 and pageSize != null and pageSize &gt; 0">
+            <![CDATA[LIMIT #{startIndex},#{pageSize}]]></if>
+    </sql>
+    <!-- 返回插入的编号,在事务开启状态下有效 -->
+    <select id="lastSequence" resultType="int"><![CDATA[
+
+
+
+        SELECT LAST_INSERT_ID() AS id
+
+
+
+        ]]></select>
+    <!-- 查询,通过主键IN(array) -->
+    <select id="selectEntryArray" parameterType="java.lang.reflect.Array" resultType="sItemSku">
+        <![CDATA[SELECT]]>
+        <include refid="QUERY_COLUMN_LIST"/>
+        <include refid="QUERY_FROM_TABLE"/>
+        <![CDATA[WHERE id IN]]>
+        <foreach collection="array" item="skuid" open="(" separator="," close=")">
+            <![CDATA[#{id}]]>
+        </foreach>
+    </select>
+
+    <!-- 查询,通过条件 -->
+    <select id="selectEntryList" parameterType="sItemSku" resultType="sItemSku">
+        <![CDATA[SELECT]]>
+        <include refid="QUERY_COLUMN_LIST"/>
+        <include refid="QUERY_FROM_TABLE"/>
+        <include refid="QUERY_WHERE_CLAUSE"/>
+        <include refid="QUERY_ORDER_LIMIT_CONDTION"/>
+    </select>
+
+    <!-- 总数查询,通过条件 -->
+    <select id="selectEntryListCount" parameterType="sItemSku" resultType="int">
+        <![CDATA[SELECT COUNT(0) AS dataCount]]>
+        <include refid="QUERY_FROM_TABLE"/>
+        <include refid="QUERY_WHERE_CLAUSE"/>
+    </select>
+    <!-- 其它SQL语句 -->
+
+    <select id="getSItemSkuListByCarBrand" parameterType="String" resultType="sItemSku">
+        select skuid from s_item_sku where (brand=-1 or brand like #{brand}) and status=1 and is_valid=1
+    </select>
+</mapper>
