@@ -4,6 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     		http://www.springframework.org/schema/beans/spring-beans.xsd"
        default-autowire="byName">
+
     <!-- BoneCP configuration -->
     <bean id="abstractDataSource" abstract="true" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
         <property name="driverClass" value="${jdbc.driverClass}"/>

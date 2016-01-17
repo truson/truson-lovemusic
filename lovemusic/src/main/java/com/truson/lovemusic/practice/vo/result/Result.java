@@ -1,6 +1,6 @@
 package com.truson.lovemusic.practice.vo.result;
 
-import com.truson.lovemusic.practice.util.result.ResultCode;
+import com.truson.lovemusic.practice.util.result.ResultCodeEnum;
 
 import java.util.HashMap;
 
@@ -16,8 +16,8 @@ public class Result {
     private HashMap data;
 
     public Result(){
-        this.code = ResultCode.error.getCode();
-        this.message = ResultCode.error.getMessage();
+        this.code = ResultCodeEnum.error.getCode();
+        this.message = ResultCodeEnum.error.getMessage();
     }
 
     public String getCode() {
