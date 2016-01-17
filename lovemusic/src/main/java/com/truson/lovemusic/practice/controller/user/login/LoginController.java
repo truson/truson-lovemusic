@@ -1,11 +1,11 @@
 package com.truson.lovemusic.practice.controller.user.login;
 
+import com.truson.lovemusic.practice.entity.user.User;
 import com.truson.lovemusic.practice.helper.user.LoginHelper;
 import com.truson.lovemusic.practice.service.user.LoginService;
-import com.truson.lovemusic.practice.util.result.LoginError;
+import com.truson.lovemusic.practice.util.result.LoginErrorEnum;
 import com.truson.lovemusic.practice.util.result.ResultUtils;
 import com.truson.lovemusic.practice.vo.result.Result;
-import com.truson.lovemusic.practice.vo.user.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +27,11 @@ public class LoginController {
     public LoginService loginService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String doLogin(UserVo userVo, HttpServletRequest request, HttpServletResponse response){
+    public String doLogin(User user, HttpServletRequest request, HttpServletResponse response){
         Result result = new Result();
-        if(!LoginHelper.checkLoginInfo(userVo))
-            ResultUtils.setErrorInfo(result, LoginError.incomplete_login_information.getCode(), LoginError.incomplete_login_information.getMessage());
-        loginService.doLogin(result, userVo);
+        if(!LoginHelper.checkLoginInfo(user))
+            ResultUtils.setErrorInfo(result, LoginErrorEnum.incomplete_login_information.getCode(), LoginErrorEnum.incomplete_login_information.getMessage());
+        loginService.doLogin(result, user);
 
 
         return "";

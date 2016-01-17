@@ -14,7 +14,7 @@
     <!--定义变量-->
     <properties>
         <encoding>UTF-8</encoding>
-        <jdk.version>1.6</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <spring.version>4.1.6.RELEASE</spring.version>
     </properties>
 
@@ -27,9 +27,8 @@
             </activation>
             <properties>
                 <!--数据库连接配置-->
-                <datasource.type>bonecp</datasource.type>
-                <base.jdbc.jdbcUrl>jdbc:mysql://localhost:3306/lovemusic?autoReconnect=true&amp;characterEncoding=UTF-8
-                </base.jdbc.jdbcUrl>
+                <base.datasource.type>bonecp</base.datasource.type>
+                <base.jdbc.jdbcUrl>jdbc:mysql://localhost:3306/lovemusic?autoReconnect=true&amp;characterEncoding=UTF-8</base.jdbc.jdbcUrl>
                 <base.jdbc.username>root</base.jdbc.username>
                 <base.jdbc.password>zxczxc</base.jdbc.password>
             </properties>
@@ -66,6 +65,42 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!--<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>-->
         <!--apache基本操作辅助包-->
         <dependency>
             <groupId>commons-lang</groupId>
@@ -78,20 +113,62 @@
             <artifactId>bonecp</artifactId>
             <version>0.8.0.RELEASE</version>
         </dependency>
+        <!--mysql驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.36</version>
+        </dependency>
         <!--spring集成mybatis-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.2</version>
         </dependency>
+        <!--todo 为什么mybatis-spring中也引入了mybatis，还需要自己在这里再添加依赖？-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.2.3</version>
+        </dependency>
+        <!--淘宝开放平台sdk（短信支持）-->
+        <dependency>
+            <groupId>com.taobao</groupId>
+            <artifactId>taobao-sdk-java-auto</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--解决springMVC @ResponseBody返回Map等数据对象，页面抛出406错误的问题，但据说jackson效率不高诶-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.2.3</version>
+        </dependency>
     </dependencies>
 
-    <!--<build>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--不配置这个无法将pom文件中定义的properties加载到其他配置文件中（如spring配置文件）-->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+            <!--如果项目中不配置maven-compiler-plugin使用的jdk版本，则会使用该插件默认jdk版本-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.3</version>
                 <configuration>
                     <encoding>${encoding}</encoding>
                     <source>${jdk.version}</source>
@@ -100,12 +177,20 @@
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.7</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                    <encoding>${encoding}</encoding>
+                </configuration>
+            </plugin>
+            <!-- 配置构建时忽略测试用例 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 
 </project>

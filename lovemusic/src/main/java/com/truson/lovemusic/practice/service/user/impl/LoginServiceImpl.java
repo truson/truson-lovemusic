@@ -1,8 +1,8 @@
 package com.truson.lovemusic.practice.service.user.impl;
 
+import com.truson.lovemusic.practice.entity.user.User;
 import com.truson.lovemusic.practice.service.user.LoginService;
 import com.truson.lovemusic.practice.vo.result.Result;
-import com.truson.lovemusic.practice.vo.user.UserVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-    public void doLogin(Result result, UserVo userVo) {
+    public void doLogin(Result result, User user) {
 
     }
 }

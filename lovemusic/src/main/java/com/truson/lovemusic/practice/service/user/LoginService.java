@@ -1,7 +1,7 @@
 package com.truson.lovemusic.practice.service.user;
 
+import com.truson.lovemusic.practice.entity.user.User;
 import com.truson.lovemusic.practice.vo.result.Result;
-import com.truson.lovemusic.practice.vo.user.UserVo;
 
 /**
  * 登录操作逻辑层接口
@@ -11,9 +11,9 @@ public interface LoginService {
 
     /**
      * 执行登录操作
-     * @param userVo
+     * @param user
      * @param result
      */
-    void doLogin(Result result, UserVo userVo);
+    void doLogin(Result result, User user);
 
 }

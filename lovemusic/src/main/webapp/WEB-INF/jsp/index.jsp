@@ -5,20 +5,32 @@
     <title>我的音乐网</title>
     <link rel="stylesheet" href="/static/css/frame_only.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<script type="text/javascript">
+    function openRegisterPage(){
+        var url = "/register/toRegister/1";
+        location.href = url;
+    }
+</script>
+
+
 </head>
 <body>
 <div class="frame_top" id="js_frame_top">
-  <div class="header_top">
-    <div class="navlist">
-      <ul>
-        <li class="mod_user" id="top_info"><p class="top_info unlogined" id="spanuserinfo">您还未登录，<a href="javascript:;" onclick="g_user.openLoginPage();" title="马上登录">马上登录</a></p></li>
-        <li class="nav_musicvip"><img src="http://i.gtimg.cn/music/icon/vip.png?max_age=2592000" alt="绿钻"/><a title="绿钻" href="http://vip.music.qq.com" target="_blank"><span>绿钻</span></a></li>
-        <li class="nav_software"><a href="http://kg.qq.com/?pgv_ref=qqmusic.y.topmenu" target="_blank" title="全民K歌"><span>全民K歌</span></a></li>
-        <li class="nav_software"><a href="http://y.qq.com/yanchu/?pgv_ref=qqmusic.y.topmenu" target="_blank" title="QQ演出"><span>QQ演出</span></a></li>
-        <li class="nav_qplay"><a href="http://y.qq.com/y/static/down/qplay.html?pgv_ref=qqmusic.y.topmenu" target="_blank" title="QPlay"><span>QPlay</span></a></li>
-      </ul>
+    <div class="header_top">
+        <div class="navlist">
+            <ul>
+                <li class="mod_user" id="top_info"><p class="top_info unlogined" id="spanuserinfo">您还未登录，<a href="javascript:;" onclick="g_user.openLoginPage();" title="马上登录">马上登录</a></p></li>
+                <li class="mod_user" id="top_regiter">
+                    <a href="javascript:;" onclick="openRegisterPage();" title="免费注册">免费注册</a>
+                </li>
+                <li class="nav_musicvip"><img src="http://i.gtimg.cn/music/icon/vip.png?max_age=2592000" alt="绿钻"/><a title="绿钻" href="http://vip.music.qq.com" target="_blank"><span>绿钻</span></a></li>
+                <li class="nav_software"><a href="http://kg.qq.com/?pgv_ref=qqmusic.y.topmenu" target="_blank" title="全民K歌"><span>全民K歌</span></a></li>
+                <li class="nav_software"><a href="http://y.qq.com/yanchu/?pgv_ref=qqmusic.y.topmenu" target="_blank" title="QQ演出"><span>QQ演出</span></a></li>
+                <li class="nav_qplay"><a href="http://y.qq.com/y/static/down/qplay.html?pgv_ref=qqmusic.y.topmenu" target="_blank" title="QPlay"><span>QPlay</span></a></li>
+            </ul>
+        </div>
     </div>
-  </div>
   <div class="main_top" id="divtopmenu">
     <h1 class="frame_logo"><img class="img_logo" src="http://imgcache.gtimg.cn/mediastyle/musicprotal/img/frame_logo_min.png?max_age=259200" alt="QQ音乐"/><a href="about:blank" onclick="showIndex();top.pgvClickStat('logo.qqmusic');" target="contentFrame" class="logo" title="QQ音乐-中国最新最全免费正版高品质音乐平台！">QQ音乐</a></h1>
     <div class="frame_search">

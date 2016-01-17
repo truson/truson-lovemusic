@@ -1,6 +1,6 @@
 package com.truson.lovemusic.practice.helper.user;
 
-import com.truson.lovemusic.practice.vo.user.UserVo;
+import com.truson.lovemusic.practice.entity.user.User;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -12,14 +12,14 @@ public class LoginHelper {
     /**
      * 检查登录信息是否完整
      * lezi用户除外
-     * @param userVo
+     * @param user
      * @return
      */
-    public static boolean checkLoginInfo(UserVo userVo) {
+    public static boolean checkLoginInfo(User user) {
         boolean result = false;
-        if (userVo != null) {
-            if (StringUtils.isNotBlank(userVo.getUserName()) && StringUtils.isNotBlank(userVo.getPassword())
-                    || StringUtils.equals("lezi", userVo.getUserName()))
+        if (user != null) {
+            if (StringUtils.isNotBlank(user.getUserName()) && StringUtils.isNotBlank(user.getPassword())
+                    || StringUtils.equals("lezi", user.getUserName()))
                 result = true;
         }
         return result;
