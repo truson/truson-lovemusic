@@ -41,24 +41,7 @@ public class RegisterController {
 
     @RequestMapping(value = "generateMsgAuthCode")
     public String generateMsgAuthCode(){
-        String appkey = "";
-        String url = "";
-        String secret = "";
-        TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-        req.setExtend("123456");
-        req.setSmsType("normal");
-        req.setSmsFreeSignName("阿里大鱼");
-        req.setSmsParamString("{\"code\":\"1234\",\"product\":\"alidayu\"}");
-        req.setRecNum("13000000000");
-        req.setSmsTemplateCode("SMS_585014");
-        AlibabaAliqinFcSmsNumSendResponse rsp = null;
-        try {
-            rsp = client.execute(req);
-        } catch (ApiException e) {
-            e.printStackTrace();
-        }
-        System.out.println(rsp.getBody());
+
         return "";
     }
 
