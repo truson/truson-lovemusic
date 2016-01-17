@@ -15,10 +15,12 @@
 
     <!-- 全局别名设置，在映射文件中只需写别名，而不必写出整个类路径 -->
     <typeAliases>
-        <typeAlias type="com.truson.lovemusic.practice.vo.user.UserVo" alias="userVo"/>
+        <typeAlias type="com.truson.lovemusic.practice.entity.user.User" alias="user"/>
     </typeAliases>
     <!-- 映射文件路径 -->
     <mappers>
+        <!--todo 此处为什么不能用classpath:来定义文件路径？
+        <mapper resource="classpath:sqlmap/UserInfo.xml"/>-->
         <mapper resource="sqlmap/UserInfo.xml"/>
     </mappers>
 </configuration>

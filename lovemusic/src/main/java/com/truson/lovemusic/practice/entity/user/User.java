@@ -1,29 +1,19 @@
-package com.truson.lovemusic.practice.vo.user;
+package com.truson.lovemusic.practice.entity.user;
 
-import com.truson.lovemusic.practice.vo.BaseVo;
+import com.truson.lovemusic.practice.entity.BaseEntity;
 
 /**
- * 用户信息vo
+ * 用户信息实体
  * Created by lezi on 2015/12/13.
  */
-public class UserVo extends BaseVo {
+public class User extends BaseEntity {
 
-    private String id;
     private String userName;
     private String password;
     private String mobile;
     private String email;
     private String realInfoId;
     private String nick;
-    private String remarks;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;
@@ -73,11 +63,4 @@ public class UserVo extends BaseVo {
         this.nick = nick;
     }
 
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
 }

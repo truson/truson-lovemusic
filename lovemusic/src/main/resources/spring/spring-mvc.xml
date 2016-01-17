@@ -12,17 +12,36 @@
        default-autowire="byName">
 
     <!-- 自动扫描且只扫描@Controller -->
-    <context:component-scan base-package="com.truson.lovemusic.practice.controller"
+    <context:component-scan base-package="com.truson.lovemusic.practice.controller,
+                                            com.truson.test.file"
                             use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!-- 注解驱动 -->
-    <mvc:annotation-driven/>
-
     <!-- 将无法mapping到Controller的path交给default servlet handler处理 ，对静态资源的访问将由默认处理 -->
-    <!--<mvc:default-servlet-handler/>-->
-    <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
+    <mvc:default-servlet-handler/>
+
+    <!-- 解决@ResponseBody注解直接返回对象并转换成JSON时出现406问题，同时解决了返回String类型乱码的问题 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json; charset=UTF-8</value>
+                        <value>application/x-www-form-urlencoded; charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -34,9 +53,11 @@
     <mvc:interceptors>
         <!--性能监控监控-->
         <!--<bean class="com.jd.admin.car.web.interceptor.StopWatchHandlerInterceptor"/>-->
+        <!--session拦截 写在interceptors里最前面表示所有访问都拦截 同<mvc:mapping path="/**"/>-->
+        <bean class="com.truson.lovemusic.practice.interceptor.SessionInterceptor"/>
         <!--校验登陆-->
         <mvc:interceptor>
-            <mvc:mapping path="/*.do"/>
+            <mvc:mapping path="/"/>
             <bean class="com.truson.lovemusic.practice.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
         <!--校验数据签名-->
